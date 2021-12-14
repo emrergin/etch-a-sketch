@@ -1,14 +1,23 @@
 let boyut=16;
 const grid=document.querySelector('#container');
-grid.setAttribute(`draggable`,"false");
+// grid.setAttribute(`draggable`,"false");
+
+// Arayüz Hakkında
+let leftMouse = false;
+let MouseVar = false; 
+window.onmousemove = function() {
+  MouseVar = true;
+}
 
 for (let i = 0; i < boyut; i++) {
     let pikselSatiri = document.createElement('div');
     pikselSatiri.classList.add('pikselSatiri');
+    pikselSatiri.classList.add('unselectable');
     pikselSatiri.setAttribute(`draggable`,"false");
     for (let j = 0; j < boyut; j++) {
         let pikselKutusu = document.createElement('div');
         pikselKutusu.classList.add('pikselKutusu');
+        pikselKutusu.classList.add('unselectable');
         pikselKutusu.setAttribute(`draggable`,"false");
         pikselSatiri.appendChild(pikselKutusu);
     }
@@ -23,29 +32,36 @@ pikseller.forEach((piksel) => {
   // and for each one we add a 'click' listener
   piksel.addEventListener('mousedown', ciz);
   piksel.addEventListener('mouseover', ciz2);
-//   ['click','ontouchstart'].forEach( evt => 
-//     piksel.addEventListener(evt, ciz2)
-// );
+  piksel.addEventListener('mouseup', dur);
 });
+
+grid.addEventListener('mouseleave', dur);
 
 function ciz(e) {
   e.target.style.cssText=`background-color:black`;
+  leftMouse=true;
 }
 function ciz2(e) {
-  if (leftMouseButtonOnlyDown){
+  if (leftMouse || !MouseVar){
     ciz(e);
   }
 }
-
-// https://stackoverflow.com/a/48970682
-var leftMouseButtonOnlyDown = false;
-
-function setLeftButtonState(e) {
-  leftMouseButtonOnlyDown = e.buttons === undefined 
-    ? e.which === 1 
-    :(e.buttons & 1) === 1;
+function dur() {
+    leftMouse=false;
 }
 
-document.body.onmousedown = setLeftButtonState;
-document.body.onmousemove = setLeftButtonState;
-document.body.onmouseup = setLeftButtonState;
+// https://stackoverflow.com/a/48970682
+
+
+// function setLeftButtonState(e) {
+//   leftMouseButtonOnlyDown = e.buttons === undefined 
+//     ? e.which === 1 
+//     :(e.buttons & 1) === 1;
+// }
+
+// document.body.onmousedown = setLeftButtonState;
+// document.body.onmousemove = setLeftButtonState;
+// document.body.onmouseup = setLeftButtonState;
+
+
+// https://stackoverflow.com/questions/7838680/detecting-that-the-browser-has-no-mouse-and-is-touch-only

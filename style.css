@@ -53,5 +53,14 @@ h1{
 
 .pikselKutusu:hover{
     transform: scale(1.1);
+    border: 1px solid black;
     animation: scale 0.5s;
+}
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
