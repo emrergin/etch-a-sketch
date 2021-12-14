@@ -5,8 +5,19 @@ const grid=document.querySelector('#container');
 // Arayüz Hakkında
 let leftMouse = false;
 let MouseVar = false; 
-window.onmousemove = function() {
-  MouseVar = true;
+let TouchVar = false;
+// window.onmousemove = mouseKontrolEt;
+
+// function mouseKontrolEt(){
+//   MouseVar = true;
+//   console.log(MouseVar);
+// }
+
+window.ontouchstart = touchKontrolEt;
+
+function touchKontrolEt(){
+  TouchVar = true;
+  console.log(TouchVar);
 }
 
 for (let i = 0; i < boyut; i++) {
@@ -32,6 +43,7 @@ pikseller.forEach((piksel) => {
   // and for each one we add a 'click' listener
   piksel.addEventListener('mousedown', ciz);
   piksel.addEventListener('mouseover', ciz2);
+  // piksel.addEventListener('touchstart', ciz);
   piksel.addEventListener('mouseup', dur);
 });
 
@@ -42,7 +54,9 @@ function ciz(e) {
   leftMouse=true;
 }
 function ciz2(e) {
-  if (leftMouse || !MouseVar){
+  // mouseKontrolEt();
+  if (leftMouse || TouchVar){
+  // if (leftMouse){
     ciz(e);
   }
 }
