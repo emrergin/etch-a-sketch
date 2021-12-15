@@ -52,7 +52,7 @@ function tahtaOlustur(){
     piksel.addEventListener('mouseover', ciz2);
     piksel.addEventListener('click', ciz2);
     piksel.addEventListener('mouseup', dur);
-    piksel.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } );
+    piksel.addEventListener("contextmenu", sil);
   });
 
 function tahtaTemizle(){
@@ -63,7 +63,7 @@ function tahtaTemizle(){
 
 grid.addEventListener('mouseleave', dur);}
 
-// SAG VEYA SOL TIK HALINDE
+// SOL TIK CIZIMI
 function ciz(e) {
   if (e.button===0){
     switch (modSec()){
@@ -86,32 +86,41 @@ function ciz(e) {
   }
     leftMouse=true;
   }
-  // if (e.button===2){
-  //   switch (modSec()){
-  //     case 'default':
-  //       e.target.classList.add(`d0`);
-  //       e.target.classList.remove(`d5`,`d1`,`d2`,`d3`,`d4`);
-  //       break;
-  //     case 'tedrici':
-  //       for (let i = 1; i <6; i++) {
-  //         if (e.target.classList.contains(`d${i}`))
-  //         {
-  //           e.target.classList.add(`d${i-1}`);
-  //           e.target.classList.remove(`d${i}`);
-  //         }
-  //       }
-  //       break;
-  //     case 'gokKusagi':
-  //       e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
-  //       break;
-  // }
-  //   rightMouse=true;
-  // }
 }
 
+// SAG TIK CIZIMI
+function sil(e){
+  // ( e )=> { e.preventDefault(); return false; } 
+  e.preventDefault();
+  switch (modSec()){
+    case 'default':
+      e.target.classList.add(`d0`);
+      e.target.classList.remove(`d5`,`d1`,`d2`,`d3`,`d4`);
+      break;
+    case 'tedrici':
+      for (let i = 1; i <6; i++) {
+        if (e.target.classList.contains(`d${i}`))
+        {
+          e.target.classList.add(`d${i-1}`);
+          e.target.classList.remove(`d${i}`);
+        }
+      }
+      break;
+    case 'gokKusagi':
+      e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      break;
+  }
+  rightMouse=true;
+  return false; 
+}
+
+// BASILI TUTUP CIZMEK ICIN
 function ciz2(e) {
-  if (leftMouse || rightMouse){
+  if (leftMouse){
     ciz(e);
+  }
+  if (rightMouse){
+    sil(e);
   }
 }
 function dur() {
