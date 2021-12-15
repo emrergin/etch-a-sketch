@@ -52,6 +52,7 @@ function tahtaOlustur(){
     piksel.addEventListener('mouseover', ciz2);
     piksel.addEventListener('click', ciz2);
     piksel.addEventListener('mouseup', dur);
+    piksel.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } );
   });
 
 function tahtaTemizle(){
@@ -67,7 +68,7 @@ function ciz(e) {
     switch (modSec()){
       case 'default':
         e.target.classList.add(`d5`);
-        e.target.classList.remove(`d0`);
+        e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`);
         break;
       case 'tedrici':
         for (let i = 5; i >0; i--) {
