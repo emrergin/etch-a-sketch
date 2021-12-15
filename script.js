@@ -1,26 +1,35 @@
 let boyut=16;
 const grid=document.querySelector('#container');
-// grid.setAttribute(`draggable`,"false");
+let boyutCubugu = document.getElementById("pikselSayisi");
+const boyutyazi=document.querySelector('#boyutMetin');
+const btext=boyutyazi.textContent;
+boyutyazi.textContent=btext+boyut;
+const rbs = document.getElementsByName('mod');
 
 // Arayüz Hakkında
 let leftMouse = false;
-let MouseVar = false; 
+function modSec(){
+  let selectedValue;
+  for (const rb of rbs) {
+      if (rb.checked) {
+          selectedValue = rb.value;
+          return (selectedValue);
+      }
+  }
+}
 let TouchVar = false;
-// window.onmousemove = mouseKontrolEt;
-
-// function mouseKontrolEt(){
-//   MouseVar = true;
-//   console.log(MouseVar);
-// }
 
 window.ontouchstart = touchKontrolEt;
 
 function touchKontrolEt(){
   TouchVar = true;
-  console.log(TouchVar);
+  // console.log(TouchVar);
 }
 
-for (let i = 0; i < boyut; i++) {
+
+function tahtaOlustur(){
+  tahtaTemizle();
+  for (let i = 0; i < boyut; i++) {
     let pikselSatiri = document.createElement('div');
     pikselSatiri.classList.add('pikselSatiri');
     pikselSatiri.classList.add('unselectable');
@@ -28,35 +37,57 @@ for (let i = 0; i < boyut; i++) {
     for (let j = 0; j < boyut; j++) {
         let pikselKutusu = document.createElement('div');
         pikselKutusu.classList.add('pikselKutusu');
+        pikselKutusu.classList.add('d0');
         pikselKutusu.classList.add('unselectable');
         pikselKutusu.setAttribute(`draggable`,"false");
+        pikselKutusu.style.cssText=`width: ${100/boyut}%`
         pikselSatiri.appendChild(pikselKutusu);
-    }
-    grid.appendChild(pikselSatiri);
+  }
+  grid.appendChild(pikselSatiri);
+  }
+  const pikseller = document.querySelectorAll('.pikselKutusu');
+
+  pikseller.forEach((piksel) => {
+    piksel.addEventListener('mousedown', ciz);
+    piksel.addEventListener('mouseover', ciz2);
+    piksel.addEventListener('click', ciz2);
+    piksel.addEventListener('mouseup', dur);
+  });
+
+function tahtaTemizle(){
+    while (grid.firstChild) {
+      grid.removeChild(grid.firstChild);
+  }
 }
 
-
-const pikseller = document.querySelectorAll('.pikselKutusu');
-
-// we use the .forEach method to iterate through each button
-pikseller.forEach((piksel) => {
-  // and for each one we add a 'click' listener
-  piksel.addEventListener('mousedown', ciz);
-  piksel.addEventListener('mouseover', ciz2);
-  // piksel.addEventListener('touchstart', ciz);
-  piksel.addEventListener('mouseup', dur);
-});
-
-grid.addEventListener('mouseleave', dur);
+grid.addEventListener('mouseleave', dur);}
 
 function ciz(e) {
-  e.target.style.cssText=`background-color:black`;
-  leftMouse=true;
+  if (e.button===0){
+    switch (modSec()){
+      case 'default':
+        e.target.classList.add(`d5`);
+        e.target.classList.remove(`d0`);
+        break;
+      case 'tedrici':
+        for (let i = 5; i >0; i--) {
+          if (e.target.classList.contains(`d${i-1}`))
+          {
+            e.target.classList.add(`d${i}`);
+            e.target.classList.remove(`d${i-1}`);
+          }
+        }
+        break;
+      case 'gokKusagi':
+        e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+        break;
+  }
+    leftMouse=true;
+  }
 }
+
 function ciz2(e) {
-  // mouseKontrolEt();
   if (leftMouse || TouchVar){
-  // if (leftMouse){
     ciz(e);
   }
 }
@@ -64,18 +95,21 @@ function dur() {
     leftMouse=false;
 }
 
-// https://stackoverflow.com/a/48970682
+// Piksel sayisi ayari
+boyutCubugu.oninput = function() {
+  boyut = this.value;
+  tahtaOlustur();
+  boyutyazi.textContent=btext+boyut;
+}
 
 
-// function setLeftButtonState(e) {
-//   leftMouseButtonOnlyDown = e.buttons === undefined 
-//     ? e.which === 1 
-//     :(e.buttons & 1) === 1;
-// }
-
-// document.body.onmousedown = setLeftButtonState;
-// document.body.onmousemove = setLeftButtonState;
-// document.body.onmouseup = setLeftButtonState;
+function temizle()
+{
+  const pikseller = document.querySelectorAll('.pikselKutusu');
+  pikseller.forEach((piksel) => {
+    piksel.style.cssText=`background-color:white`;
+  });
+}
 
 
-// https://stackoverflow.com/questions/7838680/detecting-that-the-browser-has-no-mouse-and-is-touch-only
+tahtaOlustur();
