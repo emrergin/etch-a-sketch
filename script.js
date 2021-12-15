@@ -84,7 +84,8 @@ function ciz(e) {
         break;
       case 'gokKusagi':
         e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
-        // e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`,`d5`);
+        e.target.classList.remove(`d1`,`d2`,`d3`,`d4`,`d5`);
+        e.target.classList.add(`d0`);
         break;
   }
     leftMouse=true;
@@ -116,7 +117,8 @@ function sil(e){
       break;
     case 'gokKusagi':
       e.target.style.backgroundColor=`rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
-      // e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`,`d5`);
+      e.target.classList.remove(`d1`,`d2`,`d3`,`d4`,`d5`);
+      e.target.classList.add(`d0`);
       break;
   }
 }
