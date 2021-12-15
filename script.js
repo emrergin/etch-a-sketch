@@ -70,6 +70,7 @@ function ciz(e) {
       case 'default':
         e.target.classList.add(`d5`);
         e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`);
+        e.target.style.backgroundColor = "";
         break;
       case 'tedrici':
         for (let i = 5; i >0; i--) {
@@ -79,9 +80,11 @@ function ciz(e) {
             e.target.classList.remove(`d${i-1}`);
           }
         }
+        e.target.style.backgroundColor = "";
         break;
       case 'gokKusagi':
         e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+        // e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`,`d5`);
         break;
   }
     leftMouse=true;
@@ -99,6 +102,7 @@ function sil(e){
     case 'default':
       e.target.classList.add(`d0`);
       e.target.classList.remove(`d5`,`d1`,`d2`,`d3`,`d4`);
+      e.target.style.backgroundColor = "";
       break;
     case 'tedrici':
       for (let i = 1; i <6; i++) {
@@ -108,9 +112,11 @@ function sil(e){
           e.target.classList.remove(`d${i}`);
         }
       }
+      e.target.style.backgroundColor = "";
       break;
     case 'gokKusagi':
-      e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      e.target.style.backgroundColor=`rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+      // e.target.classList.remove(`d0`,`d1`,`d2`,`d3`,`d4`,`d5`);
       break;
   }
 }
