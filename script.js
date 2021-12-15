@@ -52,7 +52,7 @@ function tahtaOlustur(){
     piksel.addEventListener('mouseover', ciz2);
     piksel.addEventListener('click', ciz2);
     piksel.addEventListener('mouseup', dur);
-    piksel.addEventListener("contextmenu", sil);
+    piksel.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } );
   });
 
 function tahtaTemizle(){
@@ -63,7 +63,7 @@ function tahtaTemizle(){
 
 grid.addEventListener('mouseleave', dur);}
 
-// SOL TIK CIZIMI
+// MOUSEa basilmis
 function ciz(e) {
   if (e.button===0){
     switch (modSec()){
@@ -86,12 +86,15 @@ function ciz(e) {
   }
     leftMouse=true;
   }
+  if (e.button===2){
+    rightMouse=true;
+    sil(e);
+  }
 }
 
-// SAG TIK CIZIMI
+// SAG TIK CIZIMI = SILIMI
 function sil(e){
   // ( e )=> { e.preventDefault(); return false; } 
-  e.preventDefault();
   switch (modSec()){
     case 'default':
       e.target.classList.add(`d0`);
@@ -110,8 +113,6 @@ function sil(e){
       e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
       break;
   }
-  rightMouse=true;
-  return false; 
 }
 
 // BASILI TUTUP CIZMEK ICIN
