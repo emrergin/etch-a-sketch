@@ -8,6 +8,7 @@ const rbs = document.getElementsByName('mod');
 
 // Arayüz Hakkında
 let leftMouse = false;
+let rightMouse = false;
 function modSec(){
   let selectedValue;
   for (const rb of rbs) {
@@ -17,14 +18,13 @@ function modSec(){
       }
   }
 }
-let TouchVar = false;
+// let TouchVar = false;
 
-window.ontouchstart = touchKontrolEt;
+// window.ontouchstart = touchKontrolEt;
 
-function touchKontrolEt(){
-  TouchVar = true;
-  // console.log(TouchVar);
-}
+// function touchKontrolEt(){
+//   TouchVar = true;
+// }
 
 
 function tahtaOlustur(){
@@ -63,6 +63,7 @@ function tahtaTemizle(){
 
 grid.addEventListener('mouseleave', dur);}
 
+// SAG VEYA SOL TIK HALINDE
 function ciz(e) {
   if (e.button===0){
     switch (modSec()){
@@ -85,15 +86,37 @@ function ciz(e) {
   }
     leftMouse=true;
   }
+  // if (e.button===2){
+  //   switch (modSec()){
+  //     case 'default':
+  //       e.target.classList.add(`d0`);
+  //       e.target.classList.remove(`d5`,`d1`,`d2`,`d3`,`d4`);
+  //       break;
+  //     case 'tedrici':
+  //       for (let i = 1; i <6; i++) {
+  //         if (e.target.classList.contains(`d${i}`))
+  //         {
+  //           e.target.classList.add(`d${i-1}`);
+  //           e.target.classList.remove(`d${i}`);
+  //         }
+  //       }
+  //       break;
+  //     case 'gokKusagi':
+  //       e.target.style.cssText+=`background-color:rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+  //       break;
+  // }
+  //   rightMouse=true;
+  // }
 }
 
 function ciz2(e) {
-  if (leftMouse || TouchVar){
+  if (leftMouse || rightMouse){
     ciz(e);
   }
 }
 function dur() {
     leftMouse=false;
+    rightMouse=false;
 }
 
 // Piksel sayisi ayari
@@ -106,10 +129,7 @@ boyutCubugu.oninput = function() {
 
 function temizle()
 {
-  const pikseller = document.querySelectorAll('.pikselKutusu');
-  pikseller.forEach((piksel) => {
-    piksel.style.cssText=`background-color:white`;
-  });
+  tahtaOlustur();
 }
 
 
