@@ -40,7 +40,7 @@ function tahtaOlustur(){
         pikselKutusu.classList.add('d0');
         pikselKutusu.classList.add('unselectable');
         pikselKutusu.setAttribute(`draggable`,"false");
-        pikselKutusu.style.cssText=`width: ${100/boyut}%`
+        pikselKutusu.style.cssText=`width: ${100/boyut}%`;
         pikselSatiri.appendChild(pikselKutusu);
   }
   grid.appendChild(pikselSatiri);
