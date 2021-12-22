@@ -18,14 +18,6 @@ function modSec(){
       }
   }
 }
-// let TouchVar = false;
-
-// window.ontouchstart = touchKontrolEt;
-
-// function touchKontrolEt(){
-//   TouchVar = true;
-// }
-
 
 function tahtaOlustur(){
   tahtaTemizle();
